@@ -6,317 +6,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Shailendra Singh — Frontend Engineer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #6ee7b7;
-      --muted: #9aa4b2;
-      --bg: #0f1724;
-      --glass: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.08);
-    }
+  <link rel="stylesheet" href="index.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box
-    }
-
-    body {
-      font-family: Inter, sans-serif;
-      background-color: #000;
-      /* Notebook page color */
-      background-image:
-        repeating-linear-gradient(to right,
-          rgba(255, 255, 255, 0.06) 0px,
-          rgba(255, 255, 255, 0.06) 1px,
-          transparent 1px,
-          transparent 40px),
-        repeating-linear-gradient(to bottom,
-          rgba(255, 255, 255, 0.04) 0px,
-          rgba(255, 255, 255, 0.04) 1px,
-          transparent 1px,
-          transparent 40px);
-      background-size: 40px 40px;
-      /* 240px columns, 40px row height */
-      color: #fff;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: url('data:image/png;base64,...') repeat;
-      /* subtle paper noise texture */
-      opacity: 0.05;
-      pointer-events: none;
-    }
-
-    canvas#bgCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      display: block
-    }
-
-    header,
-    section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 100px 20px;
-      position: relative;
-      z-index: 1
-    }
-
-    .hero {
-      text-align: center
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 12px
-    }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 600px;
-      margin: auto
-    }
-
-    .hero .buttons {
-      margin-top: 24px;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap
-    }
-
-    .btn {
-      padding: 10px 18px;
-      border-radius: 8px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      color: #fff;
-      cursor: pointer;
-      transition: transform .3s ease, background .3s ease
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.08)
-    }
-
-    .btn.primary {
-      background: var(--accent);
-      color: #05201b;
-      border: none
-    }
-
-    .section-title {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 40px;
-      text-align: center
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px
-    }
-
-    .card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 20px;
-      backdrop-filter: blur(12px);
-      transition: transform .3s ease, box-shadow .3s ease
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4)
-    }
-
-    .card h3 {
-      margin-bottom: 8px;
-      font-size: 20px
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 14px
-    }
-
-    footer {
-      text-align: center;
-      color: var(--muted);
-      padding: 40px 20px;
-      font-size: 14px
-    }
-
-    #work {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .work-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 30px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .work-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .work-number {
-      font-size: 22px;
-      font-weight: 700;
-      color: #bbb;
-      margin-right: 20px;
-      min-width: 40px;
-    }
-
-    .work-content h3 {
-      font-size: 18px;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    .work-content p {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: calc(240px * 4);
-      /* Fits exactly into 4 vertical columns */
-      margin: 0 auto;
-      padding: 0 20px;
-      /* small padding from grid line */
-    }
-
-    .section-content {
-      padding-left: 20px;
-      /* small gap from guard rail */
-      padding-right: 20px;
-    }
-
-    #notes {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 30px;
-    }
-
-    /* Main Tabs */
-.note-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.note-tabs .tab {
-  width: 160px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: rgba(0, 255, 170, 0.06);
-  border: 2px solid rgba(0, 255, 170, 0.4);
-  color: white;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.note-tabs .tab:hover {
-  background: rgba(0, 255, 170, 0.12);
-  border-color: rgba(0, 255, 170, 0.7);
-}
-
-.note-tabs .tab.active {
-  background: rgba(0, 255, 170, 0.25);
-  border-color: rgba(0, 255, 170, 1);
-  box-shadow: 0 0 10px rgba(0, 255, 170, 0.5);
-}
-
-/* Sub Tabs */
-.sub-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 0.8rem;
-}
-
-.sub-tabs .subtab {
-  width: 120px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background: rgba(100, 180, 255, 0.06);
-  border: 1px solid rgba(100, 180, 255, 0.3);
-  color: #bcdfff;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.sub-tabs .subtab:hover {
-  background: rgba(100, 180, 255, 0.15);
-  border-color: rgba(100, 180, 255, 0.6);
-}
-
-.sub-tabs .subtab.active {
-  background: rgba(100, 180, 255, 0.25);
-  border-color: rgba(100, 180, 255, 0.9);
-  color: white;
-  font-weight: 600;
-}
-
-.notes-gallery {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 100%;
-  overflow: hidden;
-  padding: 1rem;
-}
-
-.notes-gallery img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-
-  </style>
 </head>
 
 <body>
@@ -444,10 +135,9 @@
       </div>
     </div>
   </section>
-  <section id="notes">
+  <!-- <section id="notes">
     <h2 class="section-title">My Handwritten Notes</h2>
     <div class="note-tabs" id="main-tabs">
-      <!-- Tabs will be inserted by JS -->
       <span class="tab-underline"></span>
     </div>
     <div class="sub-tabs" id="sub-tabs"></div>
@@ -458,122 +148,29 @@
         📒 View on Notability
       </a>
     </div>
-  </section>
+  </section> -->
+
+  <section id="notes">
+  <h2 class="section-title">My Notes & Blog</h2>
+
+  <!-- Search -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search articles...">
+  </div>
+
+  <!-- Filters will be injected -->
+  <div class="tag-filters" id="tagFilters"></div>
+
+  <!-- Notes will be injected -->
+  <div class="notes-list" id="notesList"></div>
+</section>
+
+
   <section id="contact">
     <h2 class="section-title">Contact</h2>
     <p style="text-align:center;color:var(--muted)">shailstar201595@gmail.com</p>
   </section>
   <footer>© <span id="year"></span> Shailendra Singh — All Rights Reserved</footer>
-  <script>
-    // Year update
-    document.getElementById('year').textContent = new Date().getFullYear();
-    // Canvas background animation
-    const canvas = document.getElementById('bgCanvas'), ctx = canvas.getContext('2d');
-    let particles = []; function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight } window.addEventListener('resize', resize); resize();
-    class Particle { constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 3 + 1; this.speedX = (Math.random() - 0.5) * 0.5; this.speedY = (Math.random() - 0.5) * 0.5; this.color = `hsla(${Math.random() * 360},70%,60%,0.6)`; } update() { this.x += this.speedX; this.y += this.speedY; if (this.x < 0 || this.x > canvas.width) this.speedX *= -1; if (this.y < 0 || this.y > canvas.height) this.speedY *= -1; } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill(); } }
-    function init() { particles = []; for (let i = 0; i < 80; i++) { particles.push(new Particle()); } }
-    function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
-    init(); animate();
-
-    // Intersection Observer for staggered reveal
-    const workItems = document.querySelectorAll('.work-item');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, idx) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, idx * 150); // stagger delay
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    workItems.forEach(item => observer.observe(item));
-
-    const mainTabs = document.getElementById("main-tabs");
-    const subTabs = document.getElementById("sub-tabs");
-    const gallery = document.getElementById("notes-gallery");
-
-    // Example notes data structure
-    const notesData = {
-      css: {
-        mindmap: ["notes/css/mindMapOfCss/page1.png", "notes/css/mindMapOfCss/page2.png", "notes/css/mindMapOfCss/page3.png"],
-        responsivelayout: ["notes/css/responsiveLayout/page1.png", "notes/css/responsiveLayout/page2.png", "notes/css/responsiveLayout/page3.png", "notes/css/responsiveLayout/page4.png", "notes/css/responsiveLayout/page5.png"]
-      },
-    };
-
-    function renderMainTabs() {
-      const topics = Object.keys(notesData);
-      mainTabs.innerHTML = topics
-        .map((topic, i) => `<button class="tab ${i === 0 ? "active" : ""}" data-topic="${topic}">${topic}</button>`)
-        .join("");
-    }
-
-    function renderSubTabs(topic) {
-      const subs = Object.keys(notesData[topic]);
-      subTabs.innerHTML = subs
-        .map((sub, i) => `<button class="subtab ${i === 0 ? "active" : ""}" data-sub="${sub}">${sub}</button>`)
-        .join("");
-    }
-
-    function renderNotes(topic, sub) {
-      gallery.innerHTML = notesData[topic][sub]
-        .map(src => `<img src="${src}" alt="${sub} note">`)
-        .join("");
-    }
-
-    mainTabs.addEventListener("click", e => {
-      if (!e.target.classList.contains("tab")) return;
-      document.querySelector(".tab.active")?.classList.remove("active");
-      e.target.classList.add("active");
-      const topic = e.target.dataset.topic;
-      renderSubTabs(topic);
-      const firstSub = Object.keys(notesData[topic])[0];
-      renderNotes(topic, firstSub);
-    });
-
-    subTabs.addEventListener("click", e => {
-      if (!e.target.classList.contains("subtab")) return;
-      document.querySelector(".subtab.active")?.classList.remove("active");
-      e.target.classList.add("active");
-      const topic = document.querySelector(".tab.active").dataset.topic;
-      const sub = e.target.dataset.sub;
-      renderNotes(topic, sub);
-    });
-
-    // Initial load
-    renderMainTabs();
-    const firstTopic = Object.keys(notesData)[0];
-    renderSubTabs(firstTopic);
-    const firstSub = Object.keys(notesData[firstTopic])[0];
-    renderNotes(firstTopic, firstSub);
-
-    const mainTabsContainer = document.getElementById("main-tabs");
-    const underline = document.querySelector(".tab-underline");
-
-    function moveUnderline(activeTab) {
-      const rect = activeTab.getBoundingClientRect();
-      const containerRect = mainTabsContainer.getBoundingClientRect();
-      underline.style.width = `${rect.width}px`;
-      underline.style.transform = `translateX(${rect.left - containerRect.left}px)`;
-    }
-
-    mainTabsContainer.addEventListener("click", e => {
-      if (!e.target.classList.contains("tab")) return;
-      document.querySelector(".tab.active")?.classList.remove("active");
-      e.target.classList.add("active");
-      moveUnderline(e.target);
-    });
-
-    // Initialize underline on first tab
-    window.addEventListener("load", () => {
-      const firstTab = document.querySelector(".note-tabs .tab");
-      if (firstTab) {
-        firstTab.classList.add("active");
-        moveUnderline(firstTab);
-      }
-    });
-  </script>
 </body>
-
+<script src="./index.js"></script>
 </html>
